@@ -1,4 +1,4 @@
-# Banco de Dados Orientado a Documentos com Spring Data e MongoDB
+# Banco de Dados Orientado a Documentos com Spring Boot e MongoDB
 
 Este repositório contém atividades práticas e exemplos desenvolvidos com o objetivo de explorar os conceitos e aplicações de bancos de dados orientados a documentos, utilizando **MongoDB** integrado ao **Spring Data**.
 
