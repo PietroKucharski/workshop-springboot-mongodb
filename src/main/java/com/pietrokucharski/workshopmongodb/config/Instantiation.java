@@ -2,6 +2,7 @@ package com.pietrokucharski.workshopmongodb.config;
 
 import com.pietrokucharski.workshopmongodb.domain.Post;
 import com.pietrokucharski.workshopmongodb.domain.User;
+import com.pietrokucharski.workshopmongodb.dto.AuthorDTO;
 import com.pietrokucharski.workshopmongodb.repository.PostRepository;
 import com.pietrokucharski.workshopmongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +34,16 @@ public class Instantiation implements CommandLineRunner {
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
+        userRepository.saveAll(Arrays.asList(maria, alex, bob));
+
         Post pos1 = new Post(null, LocalDate.parse("21/03/2018", dtf)
                 .atStartOfDay(ZoneId.of("GMT")).toInstant(),
-                "Partiu viagem", "Vou viajar para São Paulo. Abraços!", maria);
+                "Partiu viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
 
         Post pos2 = new Post(null, LocalDate.parse("23/03/2018", dtf)
-                .atStartOfDay(ZoneId.of("GMT")).toInstant(), "Bom dia", "Acordei feliz hoje!", maria);
+                .atStartOfDay(ZoneId.of("GMT"))
+                .toInstant(), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
 
-        userRepository.saveAll(Arrays.asList(maria, alex, bob));
         postRepository.saveAll(Arrays.asList(pos1, pos2));
     }
 }
