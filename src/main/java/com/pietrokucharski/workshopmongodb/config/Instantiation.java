@@ -3,6 +3,7 @@ package com.pietrokucharski.workshopmongodb.config;
 import com.pietrokucharski.workshopmongodb.domain.Post;
 import com.pietrokucharski.workshopmongodb.domain.User;
 import com.pietrokucharski.workshopmongodb.dto.AuthorDTO;
+import com.pietrokucharski.workshopmongodb.dto.CommentDTO;
 import com.pietrokucharski.workshopmongodb.repository.PostRepository;
 import com.pietrokucharski.workshopmongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,16 @@ public class Instantiation implements CommandLineRunner {
         Post pos2 = new Post(null, LocalDate.parse("23/03/2018", dtf)
                 .atStartOfDay(ZoneId.of("GMT"))
                 .toInstant(), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
+
+        CommentDTO c1 = new CommentDTO("Boa viagem mano!", LocalDate.parse("21/03/2018", dtf)
+                .atStartOfDay(ZoneId.of("GMT")).toInstant(), new AuthorDTO(alex));
+        CommentDTO c2 = new CommentDTO("Aproveite", LocalDate.parse("22/03/2018", dtf)
+                .atStartOfDay(ZoneId.of("GMT")).toInstant(), new AuthorDTO(bob));
+        CommentDTO c3 = new CommentDTO("Tenha um ótimo dia", LocalDate.parse("23/03/2018", dtf)
+                .atStartOfDay(ZoneId.of("GMT")).toInstant(), new AuthorDTO(alex));
+
+        pos1.getComments().addAll(Arrays.asList(c1, c2));
+        pos2.getComments().addAll(Arrays.asList(c3));
 
         postRepository.saveAll(Arrays.asList(pos1, pos2));
 
